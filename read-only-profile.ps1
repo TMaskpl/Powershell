@@ -1,4 +1,4 @@
-# powershell.exe -executionpolicy bypass -file .\read-only-profile.ps1
+# powershell.exe -executionpolicy bypass -file .\read-only-profile.ps1  -U <Login użytkowika>
 
 param(
     $U
