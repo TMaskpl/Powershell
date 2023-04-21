@@ -5,7 +5,7 @@
 
 Ustawienie na sztywno serwera DNS na wszystkie dostępne interfejsy w Windows
 
-#### Run
+#### RunAs Administrator
 
 powershell.exe -executionpolicy bypass -file .\dns-softera.ps1  -IpDns "IP DNS"
 
@@ -16,6 +16,6 @@ powershell.exe -executionpolicy bypass -file .\dns-softera.ps1  -IpDns "IP DNS"
 
 read-only-profile.ps1
 
-#### Run
+#### RunAs Administrator
 
 powershell.exe -executionpolicy bypass -file .\read-only-profile.ps1  -U "Login użytkowika"
