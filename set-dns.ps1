@@ -1,5 +1,5 @@
 # Run
-# powershell.exe -executionpolicy bypass -file .\dns-softera.ps1  -IpDns "1.1.1.1"
+# powershell.exe -executionpolicy bypass -file .\dns-softera.ps1  -IpDns <IP DNS>
 
 param(
     $IpDns
