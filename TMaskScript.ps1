@@ -13,7 +13,7 @@ $net.MapNetworkDrive("S:", "\\10.40.222.201\pool-nvm", $false, "smb", "thc401")
 Get-Date | Out-File -FilePath "S:\Script\TMaskPL.log" -Append
 Copy-Item "S:\Script\*" -Destination $ScriptPath
 
-$files = Get-ChildItem -Filter "TM_*.ps1" $ScriptPath 
+$files = Get-ChildItem -Filter "TM_*.ps1" $ScriptPath -Name
 
 foreach ($f in $files){
     if ($f -ne $null) {
