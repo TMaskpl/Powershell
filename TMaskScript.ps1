@@ -5,7 +5,7 @@ Remove-SmbMapping -LocalPath ("S" + ":") -UpdateProfile -Force -ErrorAction Igno
 
  
 $net = new-object -ComObject WScript.Network
-$net.MapNetworkDrive("S:", "\\10.40.222.201\pool-nvm", $false, "smb", "thc401")
+$net.MapNetworkDrive("S:", "\\test\pool-nvm", $false, "smb", "test")
 #$ec = $?
 #$ec
 
