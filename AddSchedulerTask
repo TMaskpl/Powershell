@@ -1,11 +1,15 @@
 # Create folder C:\Windows\Temp\Scripts\
-
-$FolderName = "C:\Windows\Temp\Scripts\"
-if (Test-Path $FolderName) {
+$ScriptPath = "C:\Windows\Temp\Scripts\"
+if (Test-Path $ScriptPath) {
 }
 else
 {
-    New-Item $FolderName -ItemType Directory
+    New-Item $ScriptPath -ItemType Directory
+}
+
+$TMaskScript = "TMaskScript.ps1"
+if (Test-Path $TMaskScript) {
+    Copy-Item "TMaskScript.ps1" -Destination $ScriptPath
 }
 
 
