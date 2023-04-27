@@ -1,6 +1,7 @@
 # Create folder C:\Windows\Temp\Scripts\
 $ScriptPath = "C:\Windows\Temp\Scripts\"
 if (Test-Path $ScriptPath) {
+    Write-Output "OK"
 }
 else
 {
