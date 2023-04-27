@@ -5,20 +5,23 @@ Remove-SmbMapping -LocalPath ("S" + ":") -UpdateProfile -Force -ErrorAction Igno
 
  
 $net = new-object -ComObject WScript.Network
-$net.MapNetworkDrive("S:", "\\IP\pool-nvm", $false, "smb", "hasło")
-$ec = $?
-$ec
+$net.MapNetworkDrive("S:", "\\10.40.222.201\pool-nvm", $false, "smb", "thc401")
+#$ec = $?
+#$ec
 
 
 Get-Date | Out-File -FilePath "S:\Script\TMaskPL.log" -Append
 Copy-Item "S:\Script\*" -Destination $ScriptPath
 
-$files = Get-ChildItem -Filter "*.ps1" $ScriptPath 
+$files = Get-ChildItem -Filter "TM_*.ps1" $ScriptPath 
 
 foreach ($f in $files){
-    Write-Output "$f +'.local'"
+    if ($f -ne $null) {
+    Write-Output $f
+    PowerShell.exe -ExecutionPolicy Bypass -File 'C:\Windows\Temp\Scripts\$f'
+    }
 }
 
 Remove-SmbMapping -LocalPath ("S" + ":") -UpdateProfile -Force -ErrorAction Ignore
-$ec = $?
-$ec
+#$ec = $?
+#$ec
