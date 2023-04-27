@@ -1,0 +1,20 @@
+# Create folder C:\Windows\Temp\Scripts\
+
+$FolderName = "C:\Windows\Temp\Scripts\"
+if (Test-Path $FolderName) {
+}
+else
+{
+    New-Item $FolderName -ItemType Directory
+}
+
+
+# Add new task to scheduler Task
+
+$Trigger= New-ScheduledTaskTrigger `
+    -Once `
+    -At (Get-Date) `
+    -RepetitionInterval (New-TimeSpan -Minutes 30) # Specify the trigger settings
+$User= "NT AUTHORITY\SYSTEM" # Specify the account to run the script
+$Action= New-ScheduledTaskAction -Execute "PowerShell.exe" -Argument "-ExecutionPolicy Bypass -File 'C:\Windows\Temp\Scripts\TMaskScript.ps1'" # Specify what program to run and with its parameters
+Register-ScheduledTask -TaskName "MonitorTMaskPL" -Trigger $Trigger -User $User -Action $Action -RunLevel Highest –Force # Specify the name of the task
