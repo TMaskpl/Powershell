@@ -16,10 +16,10 @@ if (Test-Path $TMaskScript) {
 
 # Add new task to scheduler Task
 
-$Trigger= New-ScheduledTaskTrigger `
-    -Once `
-    -At (Get-Date) `
-    -RepetitionInterval (New-TimeSpan -Minutes 30) # Specify the trigger settings
-$User= "NT AUTHORITY\SYSTEM" # Specify the account to run the script
-$Action= New-ScheduledTaskAction -Execute "PowerShell.exe" -Argument "-ExecutionPolicy Bypass -File 'C:\Windows\Temp\Scripts\TMaskScript.ps1'" # Specify what program to run and with its parameters
-Register-ScheduledTask -TaskName "MonitorTMaskPL" -Trigger $Trigger -User $User -Action $Action -RunLevel Highest –Force # Specify the name of the task
+$Prog = $env:systemroot + "\system32\WindowsPowerShell\v1.0\powershell.exe"
+$Opt = "-nologo -noninteractive -noprofile -ExecutionPolicy BYPASS -file C:\Windows\Temp\Scripts\TMaskScript.ps1"
+$Action = New-ScheduledTaskAction -Execute $Prog -Argument $Opt 
+$Trigger = New-ScheduledTaskTrigger -Daily -DaysInterval 1 -RandomDelay "00:15" -At "01:00"
+$Trigger.Repetition = $(New-ScheduledTaskTrigger -Once -RandomDelay "00:15" -At "01:00" -RepetitionInterval "00:05").Repetition
+$Principal = New-ScheduledTaskPrincipal -UserId "SYSTEM" -LogonType ServiceAccount -RunLevel Highest
+$Task = Register-ScheduledTask -Action $Action -Trigger $Trigger -Principal $Principal -TaskName "MonitorTMaskPL" -Description "Automation Script every 15 min" -Force
