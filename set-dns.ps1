@@ -10,7 +10,7 @@ $Idx = $Idx | Get-Unique
 $Idx
 
 foreach ($i in $Idx) {
-    Set-DnsClientServerAddress -InterfaceIndex $i -ServerAddresses ($IpDns)
+    Set-DnsClientServerAddress -InterfaceIndex $i -ServerAddresses ($IpDns)  -ErrorAction Ignore
 }
 
 Get-DnsClientServerAddress
