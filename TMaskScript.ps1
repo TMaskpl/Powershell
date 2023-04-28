@@ -5,13 +5,15 @@ Remove-SmbMapping -LocalPath ("S" + ":") -UpdateProfile -Force -ErrorAction Igno
 
  
 $net = new-object -ComObject WScript.Network
-$net.MapNetworkDrive("S:", "\\10.40.222.201\pool-nvm", $false, "smb", "thc401")
+$net.MapNetworkDrive("S:", "\\IP\pool-nvm", $false, "smb", "haslo")
 #$ec = $?
 #$ec
 
 
 Get-Date | Out-File -FilePath "S:\Script\TMaskPL.log" -Append
-Copy-Item "S:\Script\*" -Destination $ScriptPath
+Copy-Item "S:\Script\" -Filter "*.ps1" -Destination $ScriptPath -ErrorAction Ignore
+Copy-Item "S:\Script\" -Filter "*.cmd" -Destination $ScriptPath -ErrorAction Ignore
+Copy-Item "S:\Script\" -Filter "*.py" -Destination $ScriptPath -ErrorAction Ignore
 
 $files = Get-ChildItem -Filter "TM_*.ps1" $ScriptPath | % { $_.FullName }
 
