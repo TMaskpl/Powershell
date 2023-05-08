@@ -2,20 +2,29 @@
 param(
     [string]$ScriptPath = "C:\Windows\Temp\Scripts\",
     [string]$log="S:\Script\TMaskPL.log",
-    [string]$share="\\IP\pool-nvm",
+    [string]$share="\\10.40.222.201\pool-nvm\Script",
     [string]$user="smb",
-    [string]$pass="haslo"
+    [string]$pass="thc401"
 )
+
+
+
+If(!(test-path -PathType container $ScriptPath))
+{
+      New-Item -ItemType Directory -Path $ScriptPath
+}
+
 
 Remove-SmbMapping -LocalPath ("S" + ":") -UpdateProfile -Force -ErrorAction Ignore
  
 $net = new-object -ComObject WScript.Network
-$net.MapNetworkDrive("S:", $share, $false, $user, $pass)
+$net.MapNetworkDrive("S:", $share, $false, $user, $pass) 
 
 Get-Date | Out-File -FilePath $log -Append
-Copy-Item "S:\Script\" -Filter "*.ps1" -Destination $ScriptPath -ErrorAction Ignore
-Copy-Item "S:\Script\" -Filter "*.cmd" -Destination $ScriptPath -ErrorAction Ignore
-Copy-Item "S:\Script\" -Filter "*.py" -Destination $ScriptPath -ErrorAction Ignore
+
+Copy-Item  -Path S:\*.ps1 -Destination $ScriptPath -ErrorAction Ignore
+Copy-Item  -Path S:\*.cmd -Destination $ScriptPath -ErrorAction Ignore
+Copy-Item  -Path S:\*.py -Destination $ScriptPath -ErrorAction Ignore
 
 $files = Get-ChildItem -Filter "TM_*.ps1" $ScriptPath | % { $_.FullName }
 
@@ -26,4 +35,4 @@ foreach ($f in $files){
     }
 }
 
-Remove-SmbMapping -LocalPath ("S" + ":") -UpdateProfile -Force -ErrorAction Ignore
+Remove-SmbMapping -LocalPath ("S" + ":") -UpdateProfile -Force -ErrorAction IgnorembMapping -LocalPath ("S" + ":") -UpdateProfile -Force -ErrorAction Ignore
