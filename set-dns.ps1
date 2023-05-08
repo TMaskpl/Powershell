@@ -1,8 +1,8 @@
 # Run
 # powershell.exe -executionpolicy bypass -file .\dns-softera.ps1  -IpDns <IP DNS>
-
+[CmdletBinding()]
 param(
-    $IpDns
+    [string]$IpDns="192.168.0.210"
 )
 
 $Idx = Get-DnsClientServerAddress | Select-Object -ExpandProperty InterfaceIndex -Property InterfaceIndex
