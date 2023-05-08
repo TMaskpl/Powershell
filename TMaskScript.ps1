@@ -2,9 +2,9 @@
 param(
     [string]$ScriptPath = "C:\Windows\Temp\Scripts\",
     [string]$log="S:\Script\TMaskPL.log",
-    [string]$share="\\10.40.222.201\pool-nvm\Script",
+    [string]$share="\\IP\pool-nvm\Script",
     [string]$user="smb",
-    [string]$pass="thc401"
+    [string]$pass="haslo"
 )
 
 
