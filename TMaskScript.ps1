@@ -20,7 +20,7 @@ $files = Get-ChildItem -Filter "TM_*.ps1" $ScriptPath | % { $_.FullName }
 foreach ($f in $files){
     if ($f -ne $null) {
     Write-Output $f
-    powershell.exe -ExecutionPolicy Bypass -File $f -ErrorAction Ignore
+    powershell.exe -ExecutionPolicy Bypass -File $f
     }
 }
 
