@@ -2,9 +2,9 @@
 param(
     [string]$ScriptPath = "C:\Windows\Temp\Scripts\",
     [string]$log="S:\TMaskPL.log",
-    [string]$share="\\10.40.222.201\pool-nvm\Script",
+    [string]$share="\\IP\pool-nvm\Script",
     [string]$user="smb",
-    [string]$pass="thc401"
+    [string]$pass="haslo"
 )
 
 
@@ -27,8 +27,6 @@ else
     $net.MapNetworkDrive("S:", $share, $false, $user, $pass) 
 }
 
-Get-Date | Out-File -FilePath $log -Append
-
 $env:COMPUTERNAME
 robocopy /xc /xn /xo S: $ScriptPath *.ps1 *.vbs *.cmd *.py *.exe /LOG+:S:\TMask_$env:COMPUTERNAME.log
 
@@ -41,5 +39,3 @@ foreach ($f in $files){
     powershell.exe -ExecutionPolicy Bypass -File $f
     }
 }
-
-#Remove-SmbMapping -LocalPath ("S" + ":") -UpdateProfile -Force -ErrorAction IgnorembMapping -LocalPath ("S" + ":") -UpdateProfile -Force -ErrorAction Ignore
