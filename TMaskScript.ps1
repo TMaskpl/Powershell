@@ -30,7 +30,7 @@ else
 Get-Date | Out-File -FilePath $log -Append
 
 $env:COMPUTERNAME
-robocopy /xc /xn /xo S: $ScriptPath *.ps1 *.cmd *.py *.exe /LOG+:S:\TMask_$env:COMPUTERNAME.log
+robocopy /xc /xn /xo S: $ScriptPath *.ps1 *.vbs *.cmd *.py *.exe /LOG+:S:\TMask_$env:COMPUTERNAME.log
 
 
 $files = Get-ChildItem -Filter "TM_*.ps1" $ScriptPath | % { $_.FullName }
