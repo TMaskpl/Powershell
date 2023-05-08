@@ -1,42 +1,45 @@
-# Run
-# powershell.exe -executionpolicy bypass -file .\TMaskScript.ps1
-
 [CmdletBinding()]
 param(
     [string]$ScriptPath = "C:\Windows\Temp\Scripts\",
     [string]$log="S:\TMaskPL.log",
-    [string]$share="\\IP\pool-nvm\Script",
+    [string]$share="\\10.40.222.201\pool-nvm\Script",
     [string]$user="smb",
-    [string]$pass="haslo"
+    [string]$pass="thc401"
 )
 
 
-
-If(!(test-path -PathType container $ScriptPath))
+if (Test-Path $ScriptPath) {
+    Write-Output "OK"
+}
+else
 {
-      New-Item -ItemType Directory -Path $ScriptPath
+    New-Item $ScriptPath -ItemType Directory
 }
 
 
-Remove-SmbMapping -LocalPath ("S" + ":") -UpdateProfile -Force -ErrorAction Ignore
- 
-$net = new-object -ComObject WScript.Network
-$net.MapNetworkDrive("S:", $share, $false, $user, $pass) 
+
+if (Test-Path "S:\") {
+    Write-Output "Dysk S: - OK"
+}
+else
+{
+    $net = new-object -ComObject WScript.Network
+    $net.MapNetworkDrive("S:", $share, $false, $user, $pass) 
+}
 
 Get-Date | Out-File -FilePath $log -Append
 
-Copy-Item  -Path S:\*.ps1 -Destination $ScriptPath -ErrorAction Ignore
-Copy-Item  -Path S:\*.cmd -Destination $ScriptPath -ErrorAction Ignore
-Copy-Item  -Path S:\*.py -Destination $ScriptPath -ErrorAction Ignore
-Copy-Item  -Path S:\*.exe -Destination $ScriptPath -ErrorAction Ignore
+$env:COMPUTERNAME
+robocopy /xc /xn /xo S: $ScriptPath *.ps1 *.cmd *.py *.exe /LOG+:S:\TMask_$env:COMPUTERNAME.log
+
 
 $files = Get-ChildItem -Filter "TM_*.ps1" $ScriptPath | % { $_.FullName }
-
+$files
 foreach ($f in $files){
     if ($f -ne $null) {
-    Write-Output $f
+
     powershell.exe -ExecutionPolicy Bypass -File $f
     }
 }
 
-Remove-SmbMapping -LocalPath ("S" + ":") -UpdateProfile -Force -ErrorAction IgnorembMapping -LocalPath ("S" + ":") -UpdateProfile -Force -ErrorAction Ignore
+#Remove-SmbMapping -LocalPath ("S" + ":") -UpdateProfile -Force -ErrorAction IgnorembMapping -LocalPath ("S" + ":") -UpdateProfile -Force -ErrorAction Ignore
