@@ -7,12 +7,7 @@ param(
     [string]$pass="haslo",
 )
 
-
-
-
-
 Remove-SmbMapping -LocalPath ("S" + ":") -UpdateProfile -Force -ErrorAction Ignore
-
  
 $net = new-object -ComObject WScript.Network
 $net.MapNetworkDrive("S:", $share, $false, $user, $pass)
