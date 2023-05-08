@@ -1,3 +1,6 @@
+# Run
+# powershell.exe -executionpolicy bypass -file .\AddSchedulerTask
+
 # Create folder C:\Windows\Temp\Scripts\
 $ScriptPath = "C:\Windows\Temp\Scripts\"
 if (Test-Path $ScriptPath) {
