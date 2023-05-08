@@ -1,3 +1,6 @@
+# Run
+# powershell.exe -executionpolicy bypass -file .\TMaskScript.ps1
+
 [CmdletBinding()]
 param(
     [string]$ScriptPath = "C:\Windows\Temp\Scripts\",
