@@ -4,7 +4,7 @@ param(
     [string]$log="S:\Script\TMaskPL.log",
     [string]$share="\\IP\pool-nvm",
     [string]$user="smb",
-    [string]$pass="haslo",
+    [string]$pass="haslo"
 )
 
 Remove-SmbMapping -LocalPath ("S" + ":") -UpdateProfile -Force -ErrorAction Ignore
