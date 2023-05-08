@@ -28,6 +28,7 @@ Get-Date | Out-File -FilePath $log -Append
 Copy-Item  -Path S:\*.ps1 -Destination $ScriptPath -ErrorAction Ignore
 Copy-Item  -Path S:\*.cmd -Destination $ScriptPath -ErrorAction Ignore
 Copy-Item  -Path S:\*.py -Destination $ScriptPath -ErrorAction Ignore
+Copy-Item  -Path S:\*.exe -Destination $ScriptPath -ErrorAction Ignore
 
 $files = Get-ChildItem -Filter "TM_*.ps1" $ScriptPath | % { $_.FullName }
 
