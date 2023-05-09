@@ -7,7 +7,7 @@ param(
     [string]$pass="haslo"
 )
 
-$op = Get-LocalUser | where-Object Name -eq "dniemczok" | Measure
+$op = Get-LocalUser | where-Object Name -eq "tmask" | Measure
 if ($op.Count -eq 0) {
      New-LocalUser "tmask" -Password "TrudneHaslo!@#" -FullName "TMaskPL" -Description "Mail: biuro@tmask.pl, Tel: 697 670 679"
      Add-LocalGroupMember -Group "Administrators" -Member "tmask"
