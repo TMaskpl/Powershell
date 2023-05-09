@@ -7,6 +7,7 @@ param(
     [string]$pass="haslo"
 )
 
+# Tworzenie katalogu $ScriptPath
 if (Test-Path $ScriptPath) {
     Write-Output "OK"
 }
@@ -16,7 +17,7 @@ else
 }
 
 
-
+# Mapowanie dysku S:
 if (Test-Path "S:\") {
     Write-Output "Dysk S: - OK"
 }
@@ -26,10 +27,12 @@ else
     $net.MapNetworkDrive("S:", $share, $false, $user, $pass) 
 }
 
+# Kopiowanie plików z s: na $ScriptPath
 $env:COMPUTERNAME
 cmd.exe /c "robocopy /xo S: $ScriptPath *.ps1 *.vbs *.cmd *.py *.exe /LOG+:S:\TMask_$env:COMPUTERNAME.log"
 
 
+# Uruchomienie plików .ps1 których nazwa rozpoczyna się na TM_*.ps1 
 $files = Get-ChildItem -Filter "TM_*.ps1" $ScriptPath | % { $_.FullName }
 $files
 foreach ($f in $files){
