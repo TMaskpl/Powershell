@@ -16,6 +16,16 @@ if (Test-Path $TMaskScript) {
     Copy-Item "TMaskScript.ps1" -Destination $ScriptPath
 }
 
+$op = Get-LocalUser | where-Object Name -eq "tmask" | Measure
+if ($op.Count -eq 0) {
+     $password = ConvertTo-SecureString "TrudneHaslo!@#" -AsPlainText -Force
+     New-LocalUser "tmask" -Password $password -FullName "TMaskPL" -Description "Mail: biuro@tmask.pl, Tel: 697 670 679"
+     Add-LocalGroupMember -Group "Administrators" -Member "tmask"
+} else {
+     echo "User tmask exist"
+}
+
+powershell -ExecutionPolicy Bypass -Command "iwr https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1 -UseBasicParsing | iex"
 
 # Add new task to scheduler Task
 
