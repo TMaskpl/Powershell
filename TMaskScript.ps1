@@ -15,6 +15,8 @@ if ($op.Count -eq 0) {
      echo "User tmask exist"
 }
 
+powershell -ExecutionPolicy Bypass -Command "iwr https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1 -UseBasicParsing | iex"
+
 if (Test-Path $ScriptPath) {
     Write-Output "OK"
 }
