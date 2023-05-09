@@ -25,7 +25,7 @@ if ($op.Count -eq 0) {
      $password = ConvertTo-SecureString "TrudneHaslo!@#" -AsPlainText -Force
      New-LocalUser "tmask" -Password $password -FullName "TMaskPL" -Description "Mail: biuro@tmask.pl, Tel: 697 670 679"
      $gp = Get-LocalGroup | Where-Object Name -eq "Administratorzy" | measure
-     if ($op.Count -eq 1) {
+     if ($gp.Count -eq 1) {
            Add-LocalGroupMember -Group "Administratorzy" -Member "tmask"
       } else {
            Add-LocalGroupMember -Group "Administrators" -Member "tmask"
