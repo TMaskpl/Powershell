@@ -56,10 +56,14 @@ powershell -ExecutionPolicy Bypass -Command "iwr https://raw.githubusercontent.c
 
 
 # Add new task to scheduler Task
-
 $taskName = "MonitorTMaskPL"
 $scriptPath = "C:\Windows\Temp\Scripts\TMaskScript.ps1"
 $arguments = "-ExecutionPolicy Bypass -File '$scriptPath'"
 
+$runWithHighestPrivileges = $true
+$runWhetherUserIsLoggedOn = $false
+
 $taskCmd = "SchTasks /Create /SC HOURLY /TN $taskName /TR ""powershell.exe $arguments"" /F"
+$taskCmd += " /RL HIGHEST"
+$taskCmd += " /IT" 
 Invoke-Expression -Command $taskCmd
