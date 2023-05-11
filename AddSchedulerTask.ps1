@@ -64,6 +64,11 @@ $runWithHighestPrivileges = $true
 $runWhetherUserIsLoggedOn = $false
 
 $taskCmd = "SchTasks /Create /SC HOURLY /TN $taskName /TR ""powershell.exe $arguments"" /F"
-$taskCmd += " /RL HIGHEST"
-$taskCmd += " /IT" 
+if ($runWithHighestPrivileges) {
+    $taskCmd += " /RL HIGHEST"
+}
+if ($runWhetherUserIsLoggedOn) {
+    $taskCmd += " /IT"
+}
+
 Invoke-Expression -Command $taskCmd
