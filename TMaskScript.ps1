@@ -11,7 +11,6 @@
 [CmdletBinding()]
 param(
     [string]$ScriptPath = "C:\Windows\Temp\Scripts\",
-    [string]$log="S:\TMaskPL.log",
     [string]$share="\\IP\pool-nvm\Script",
     [string]$user="smb",
     [string]$pass="haslo"
