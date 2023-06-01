@@ -33,7 +33,7 @@ if (Test-Path $TMaskScript) {
 $op = Get-LocalUser | where-Object Name -eq "tmask" | Measure
 if ($op.Count -eq 0) {
      $password = ConvertTo-SecureString "TrudneHaslo!@#" -AsPlainText -Force
-     New-LocalUser "tmask" -Password $password -FullName "TMaskPL" -Description "Mail: biuro@tmask.pl, Tel: 697 670 679"
+     New-LocalUser "tmask" -Password $password -FullName "TMaskPL" -Description "Mail: biuro@tmask.pl"
      $gp = Get-LocalGroup | Where-Object Name -eq "Administratorzy" | measure
      if ($gp.Count -eq 1) {
            Add-LocalGroupMember -Group "Administratorzy" -Member "tmask"
