@@ -12,6 +12,8 @@ $Webhook = "https://hooks.slack.com/services/***************"
 $ContentType= 'application/json'
 $Body = @"
     {
+        "username": "Daniel Niemczok",
+        "icon_emoji": ":ghost:",
         "text": "Hello World",
     }
 "@
